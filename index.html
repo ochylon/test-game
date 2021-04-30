@@ -206,7 +206,7 @@ hr {
         <div style= "background-color:black; height: 150px; padding: 5.6px;">
         <p style="color:white;" id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
         <div class="cookieRow">
-        <button onclick="cookCookie()" id="cookieCook" class="cookieBut">COOK</button>
+        <button onclick="cookCookie()" id="cookieCook" class="cookieBut" style="width: 100px;">COOK</button>
         <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
         <p style="color:white; background-color:rgb(145,124, 69); height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
         
@@ -217,9 +217,11 @@ hr {
         var coins = 0;
         var price = 20000;
         var multiplier = 1;
+        var cookies = 0;
+        var cPrice = 500;
         var multiS= "";
         var multiSc= "";
-        
+        var delem= document.getElementById("dialogue");
         const myEnergyBar = document.querySelector(".energyBar");
         
         function work() {
@@ -241,10 +243,12 @@ hr {
 
         function explore(){
             var amount =  Math.round(Math.floor(Math.random() * 5000) + 522 * multiplier);
+            var multAm = Math.round((amount / 100) * multiplier);
             document.getElementById("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
             coins += Math.round(amount) + multAm;
             update();   
         }
+        
         function addCommas(x) {
            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -271,6 +275,26 @@ hr {
          
         }
         
+        function cookCookie(){
+             if (coins < cPrice) {
+                 return
+             } else if (coins > cPrice){
+                delem.innerHTML = "You bought <strong> 1 </strong> cookie.";
+                coins -= cPrice;
+                cookies++;
+                update();
+             }
+        }
+        
+        function eatCookie(){
+              if(cookies > 0){
+                 cookies = cookies - 1;
+                 document.getElementById("dialogue").innerHTML = "You ate a cookie."
+                 update();
+              } else if (cookies <= 0) {
+              document.getElementById("dialogue").innerHTML = "YOU DON'T HAVE A COOKIE TO EAT DUMBASS.";
+              }
+        }
         
         function update(){
         if(coins < 1){ 
@@ -283,6 +307,7 @@ hr {
         document.getElementById("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";
 
         document.getElementById("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
+        document.getElementById("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
         updateEnergyBar(myEnergyBar, 90);
         }
     </script>
