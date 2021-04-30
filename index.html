@@ -1,0 +1,249 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="try.css">
+    <title>SWAG GAME</title></head>
+</head>
+<style>
+html {
+    font-family: Arial;
+}
+
+
+.header {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  height:60px;
+  color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: in-line block;
+}
+
+
+
+
+body {
+   background-color: gray;
+}
+
+.energyBar {
+  position: relative;
+  border-radius: 5px;
+  height: 21px;
+  background-color: rgb(220,222,222);
+  overflow: hidden;
+}
+
+.energyFill {
+  height: 100%;
+  width: 10%;
+  background: rgb(249,71,71);
+  transition: all 1s;
+}
+
+.energyAm  {
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  font: bold;
+  position: absolute; 
+  color: black;
+}
+
+header h3 {
+    position: absolute;
+    border: 2px solid rgb(255, 255, 255);
+    border-style: ridge;
+    padding: 3px 10px;
+    display: inline-block;
+    margin-left: 6px;
+    margin-top: 12px;
+    border-radius: 30px;
+    color: white;
+    width: auto;
+    font-size: 16px;
+}
+
+header .demotext {
+   color: red;
+   font-size: 4px;
+   font-style: bold;
+   margin: 12px 115px;
+   width: 10px;
+}
+
+button {
+    background-color: rgb(101,225,120);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+    border-style: ridge;
+    border-radius: 3px;
+    border: rgb(101,225,120);
+  }
+
+.divs {
+    width: 250px;
+    padding: 10px;
+    border: 5px solid rgb(101,219,120);
+    margin: 10;
+    background-color: #1c1d1c;
+    color:white;
+    border-radius: 5px;
+    border-style : ridge;
+}
+
+.header .coins {
+    width: 90px; length: 100px;
+    padding: 0px;
+    border: 2px solid rgb(200,219,95);
+    display: inline-block;
+    margin: -27px 0 0 0px;
+    background-color: #1c1d1c;
+    color:white;
+    float: right;
+    border-radius: 5px; 
+    border-style: ridge;
+    font-size: 13px;
+}
+
+hr {
+    border: 1px solid rgb(0, 0, 0);
+  }
+
+.explore {
+  background-color: rgb(104,168,225) ;
+}
+
+.mult {
+  color: rgb(220, 220, 99);
+}
+
+.cookies {
+   color: rgba(240, 100, 50, 255);
+}
+</style>
+<body style="background-color:rgb(87,87,87);">
+    <header class="header"><h3 class="title">SWAG GAME</h3><p class="demotext">DEMO!</p>
+    <div class="coins">
+    <p id="coinsVal" style="text-align:center; padding: 0px;">0 coins</p>
+    </div></header>
+    <br><br><br><br>
+    <center>
+        <button onclick= "work()">WORK</button>
+        <button onclick= "explore()" class="explore">EXPLORE</button><hr></hr>
+    <div class="divs">
+        <p id="dialogue">Welcome to <strong>SWAG GAME</strong> !
+        <br> <(￣︶￣)></p>
+    </div>
+    <hr> </hr>
+    </center>
+    
+    
+      <br> <div class="energyBar">
+      <div class="energyFill"></div>
+      <span class="energyAm">0%</span>
+      </div>
+      
+        
+      <br>
+    <center>  <div style= "background-color:black; height: 135px; padding: 5.6px;">
+        <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
+      <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
+        <p style="color:white;" id="price">20,000 coins</p></div><br> <br>
+        <div style= "background-color:black; height: 135px; padding: 5.6px;">
+        <p style="color:white;" id="currentMulti">You currently have <strong class="cookies">0</strong> cookies.</p>
+        <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">BUY</button>
+        <p style="color:white;" id="price"> 500 coins</p></div></center>
+        
+        </body>
+        
+        
+    <script>
+        var coins = 0;
+        var price = 20000;
+        var multiplier = 1;
+        var multiS= "";
+        var multiSc= "";
+        
+        const myEnergyBar = document.querySelector(".energyBar");
+        
+        function work() {
+         var workAmount= [
+          /*1*/Math.round(Math.floor((Math.random() * 2000) + 300)), 
+          /*2*/Math.round(Math.floor((Math.random() * 12000) + 5000))
+          
+          ];
+            var wrDet = Math.floor(Math.random() * 2);
+            
+            var workRandom= [/*1*/"You worked and got <strong>" + addCommas(workAmount[wrDet]) + "</strong> coins.",
+                             /*2*/"You stayed in the office for 24 hours, Your boss was satisfied with you work. You got <strong>" 
+                             + addCommas(workAmount[wrDet]) + "</strong> coins."
+          ]; 
+            document.getElementById("dialogue").innerHTML = workRandom[wrDet];
+            coins += workAmount[wrDet];
+            update();
+         } 
+
+        function explore(){
+            var amount =  Math.round(Math.floor(Math.random() * 5000) + 522 * multiplier);
+            document.getElementById("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount) + "</strong> coins";
+            coins += Math.round(amount);
+            update();   
+        }
+        function addCommas(x) {
+           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        function upgrade(){
+           var multiCap = 1;
+           if (coins < price){
+           return;
+           } else if (coins > price){
+           if ( multiplier > 10) {
+           multiCap = 1.2;
+           } 
+           coins -= price;
+           multiplier = multiplier + 0.1;
+           price = Math.round((multiCap * 1.5) * price);
+           update();
+           }
+        }
+        
+        function updateEnergyBar (test, value) {
+          value = Math.round(value);
+          
+         test.querySelector(".energyFill").style.width = `${value}%`;
+         test.querySelector(".energyAm").textContent = `${value}%`;
+         
+        }
+        
+        
+        function update(){
+        if(coins < 1){ 
+          multiSc = "";
+        } else if (coins >= 1) {
+          multiSc = "s";
+        }  
+        document.getElementById("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
+
+        document.getElementById("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";
+
+        document.getElementById("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
+        updateEnergyBar(myEnergyBar, 90);
+        }
+    </script>
+</center>
+</body>
+</html>
