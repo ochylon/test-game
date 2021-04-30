@@ -8,7 +8,7 @@
 </head>
 <style>
 html {
-    font-family: Arial, sans-serif;
+    font-family: Arial;
 }
 
 
@@ -109,7 +109,7 @@ button {
 }
 
 .header .coins {
-    width: 90px; length: 100px;
+    width: 150px; length: 100px;
     padding: 0px;
     border: 2px solid rgb(200,219,95);
     display: inline-block;
@@ -138,6 +138,41 @@ hr {
 .cookies {
    color: rgba(240, 100, 50, 255);
 }
+
+.cookieRow {
+   text-align: center;
+   width:100%;
+   height:45px;
+   position: relative;
+}
+
+.cookieBut {
+   display: in-line-block;
+   line-height: 10px;
+   padding: 15px 18px auto;
+   margin: 10px 1px;
+   width: 99px;
+   float: center;
+}
+
+.cookieBut:after {
+ content: "";
+ clear: both;
+ display:table;
+}
+
+.cookiePrice {
+  text-align:center;
+}
+
+.multiPrice {
+   position: relative;
+   text-align: center;
+   margin: 10px 1px 1px 1.5px;
+   color:white; background-color:rgb(220, 220, 99); 
+   height: 20px; padding: 10px;
+}
+
 </style>
 <body style="background-color:rgb(87,87,87);">
     <header class="header"><h3 class="title">SWAG GAME</h3><p class="demotext"><strong>DEMO!</strong></p>
@@ -163,14 +198,17 @@ hr {
       
         
       <br>
-    <center>  <div style= "background-color:black; height: 135px; padding: 5.6px;">
+    <center>  <div style= "position: relative; margin-right:1px;background-color:black; height: 145px; padding: 5.6px;">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
-        <p style="color:white;" id="price">20,000 coins</p></div><br> <br>
-        <div style= "background-color:black; height: 135px; padding: 5.6px;">
-        <p style="color:white;" id="currentMulti">You currently have <strong class="cookies">0</strong> cookies.</p>
-        <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">BUY</button>
-        <p style="color:white;" id="price"> 500 coins</p></div></center>
+        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p></div><br> <br>
+        
+        <div style= "background-color:black; height: 150px; padding: 5.6px;">
+        <p style="color:white;" id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
+        <div class="cookieRow">
+        <button onclick="cookCookie()" id="cookieCook" class="cookieBut">COOK</button>
+        <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
+        <p style="color:white; background-color:rgb(145,124, 69); height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
         
         </body>
         
@@ -191,20 +229,20 @@ hr {
           
           ];
             var wrDet = Math.floor(Math.random() * 2);
-            
-            var workRandom= [/*1*/"You worked and got <strong>" + addCommas(workAmount[wrDet]) + "</strong> coins.",
+            var multAm = Math.round(workAmount[wrDet] + (workAmount[wrDet] / 100) * multiplier);
+            var workRandom= [/*1*/"You worked and got <strong>" + addCommas(workAmount[wrDet] + multAm) + "</strong> coins.",
                              /*2*/"You stayed in the office for 24 hours, Your boss was satisfied with you work. You got <strong>" 
-                             + addCommas(workAmount[wrDet]) + "</strong> coins."
+                             + addCommas(workAmount[wrDet] + multAm) + "</strong> coins."
           ]; 
             document.getElementById("dialogue").innerHTML = workRandom[wrDet];
-            coins += workAmount[wrDet];
+            coins += Math.round(workAmount[wrDet] + multAm);
             update();
          } 
 
         function explore(){
             var amount =  Math.round(Math.floor(Math.random() * 5000) + 522 * multiplier);
-            document.getElementById("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount) + "</strong> coins";
-            coins += Math.round(amount);
+            document.getElementById("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
+            coins += Math.round(amount) + multAm;
             update();   
         }
         function addCommas(x) {
@@ -219,7 +257,7 @@ hr {
            multiCap = 1.2;
            } 
            coins -= price;
-           multiplier = multiplier + 0.1;
+           multiplier = multiplier + 0.1369;
            price = Math.round((multiCap * 1.5) * price);
            update();
            }
