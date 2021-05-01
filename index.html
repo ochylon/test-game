@@ -233,7 +233,8 @@ hr {
         const myEnergyBar = document.querySelector(".energyBar");
         
         function receiveAm(miNcap, maXcap) {
-           return Math.round(Math.floor((Math.random() * maXcap) + miNcap));
+           
+           return Math.round((miNcap - 0.5) + Math.random() * (maXcap - miNcap + 1)); 
         } 
         
         
