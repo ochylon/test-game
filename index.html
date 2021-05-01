@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="try.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <title>SWAG GAME</title></head>
+    <title>beta-test-game</title></head>
 </head>
 <style>
 :root {
@@ -32,7 +32,7 @@
 
 
 body {
-   background-color: gray;
+   background-color: #3D405B;
 }
 
 .energyBar {
@@ -146,14 +146,15 @@ hr {
 .cookieRow {
    text-align: center;
    width:100%;
-   height:45px;
+   height:57px;
    position: relative;
+   margin-top: -10;
 }
 
 .cookieBut {
    display: in-line-block;
-   line-height: 10px;
-   padding: 15px 18px auto;
+   font-size: 16px;
+   padding: 15px 32px;
    margin: 10px 1px;
    width: 99px;
    float: center;
@@ -166,19 +167,21 @@ hr {
 }
 
 .cookiePrice {
-  text-align:center;
+  text-align:center; color:white; 
+  background-color:rgb(169,124, 69); 
+  height: 20px; padding: 10px; margin-top: 10px;
 }
 
 .multiPrice {
    position: relative;
    text-align: center;
-   margin: 10px 1px 1px 1.5px;
-   color:white; background-color:rgb(220, 220, 99); 
+   margin-top: 10px;
+   color:white; background-color:rgb(219, 200, 50); 
    height: 20px; padding: 10px;
 }
 
 </style>
-<body style="background-color:rgb(87,87,87);">
+<body>
     <header class="header"><h3 class="title">SWAG GAME</h3><p class="demotext"><strong>DEMO!</strong></p>
     <div class="coins">
     <p id="coinsVal" style="text-align:center; padding: 0px;">0 coins</p>
@@ -202,17 +205,17 @@ hr {
       
         
       <br>
-    <center>  <div style= "position: relative; margin-right:1px;background-color:black; height: 149px; padding: 5.6px;">
+    <center>  <div style= "position: relative; margin-right:1px;background-color:black; height: 149px; padding: 5.6px; border-radius: 5px;">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
         <p style="color:white;" id="price" class="multiPrice">20,000 coins</p></div><br> <br>
         
-        <div style= "background-color:black; height: 150px; padding: 5.6px;">
-        <p style="color:white;" id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
+        <div style= "background-color:black; height: 150px; padding: 5.6px; border-radius: 5px;">
+        <p style="color:white;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
         <div class="cookieRow">
         <button onclick="cookCookie()" id="cookieCook" class="cookieBut" style="width: 100px;">COOK</button>
         <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
-        <p style="color:white; background-color:rgb(169,124, 69); height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
+        <p style=" height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
         
         </body>
         
@@ -241,7 +244,7 @@ hr {
           
           ];
             numSel = Math.floor(Math.random() * 2);
-            var multAm = Math.round(workAmount[numSel] + (workAmount[numSel] / 100) * multiplier);
+            var multAm = Math.round((workAmount[numSel] / 100) * multiplier);
             var workRandom = [/*1*/`You worked and got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`,
                              /*2*/`You stayed in the office for 24 hours, Your boss was satisfied with you work. You got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`
           ]; 
@@ -272,6 +275,8 @@ hr {
            } 
            coins -= price;
            multiplier = multiplier + 0.1369;
+           
+           delem.innerHTML = `You upgraded your multiplier for <strong> ${addCommas(price)} </strong> coins.`;
            price = Math.round((multiCap * 1.5) * price);
            update();
            }
