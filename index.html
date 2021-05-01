@@ -35,7 +35,6 @@ body {
   height: 21px;
   background-color: rgb(120,50,50);
   overflow: hidden;
-  z-index: 1;
 }
 
 .energyFill {
@@ -404,7 +403,7 @@ hr {
              if (coins < cPrice) {
                  return
              } else if (coins > cPrice){
-                delem.innerHTML = "You bought <strong> 1 </strong> cookie.";
+                delem.innerHTML = "You baked <strong> 1 </strong> cookie.";
                 coins -= cPrice;
                 cookies++;
                 update();
