@@ -1,6 +1,5 @@
 <html lang="en">
 <head>
-    <meta property="" content="og:fuck you">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -235,6 +234,24 @@ hr {
         var delem= document.getElementById("dialogue");
         const myEnergyBar = document.querySelector(".energyBar");
         
+        sessionLoad();
+        autoSave();
+        
+        
+        function autoSave() {
+           localStorage.setItem("coins", coins);
+           localStorage.setItem("multiplier", multiplier);
+           localStorage.setItem("price", price);
+           localStorage.setItem("cookies", cookies);
+           setInterval(autoSave(), 5000);
+        }
+        
+        function sessionLoad(){
+           coins = localStorage.getItem("coins");
+           multiplier = localStorage.getItem("multiplier");
+           price = localStorage.getItem("price");
+           cookies = localStorage.getItem("cookies");
+        }
         function receiveAm(miNcap, maXcap) {
            
            return Math.round((miNcap - 0.5) + Math.random() * (maXcap - miNcap + 1)); 
@@ -281,8 +298,7 @@ hr {
            multiplier = multiplier + 0.1369;
            
            delem.innerHTML = `You upgraded your multiplier for <strong> ${addCommas(price)} </strong> coins.`;
-           // price = Math.round((multiCap * 1.5) * price);
-           price = price * 2;
+           price = Math.round((multiCap * 1.5) * price);
            update();
            }
         }
