@@ -4,11 +4,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="try.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <title>SWAG GAME</title></head>
 </head>
 <style>
-html {
-    font-family: Arial;
+:root {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
 }
 
 
@@ -73,12 +76,12 @@ header h3 {
 
 header .demotext {
    color: red;
-   font-size: 6 px;
+   font-size: .8rem;
    font-style: bold;
    margin: 12px 105px;
    width: 10px;
    position: fixed;
-   z-index: 99999999;
+   z-index: 696969;
 }
 
 button {
@@ -94,6 +97,7 @@ button {
     cursor: pointer;
     border-style: ridge;
     border-radius: 3px;
+    font-weight: 700;
     border: rgb(101,225,120);
   }
 
@@ -120,7 +124,7 @@ button {
     float: right;
     border-radius: 5px; 
     border-style: ridge;
-    font-size: 13px;
+    font-size: .85rem;
 }
 
 hr {
@@ -208,7 +212,7 @@ hr {
         <div class="cookieRow">
         <button onclick="cookCookie()" id="cookieCook" class="cookieBut" style="width: 100px;">COOK</button>
         <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
-        <p style="color:white; background-color:rgb(145,124, 69); height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
+        <p style="color:white; background-color:rgb(169,124, 69); height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
         
         </body>
         
@@ -221,34 +225,40 @@ hr {
         var cPrice = 500;
         var multiS= "";
         var multiSc= "";
+        var numSel = 0;
         var delem= document.getElementById("dialogue");
         const myEnergyBar = document.querySelector(".energyBar");
         
+        function receiveAm(miNcap, maXcap) {
+           return Math.round(Math.floor((Math.random() * maXcap) + miNcap));
+        } 
+        
+        
         function work() {
          var workAmount= [
-          /*1*/Math.round(Math.floor((Math.random() * 2000) + 300)), 
-          /*2*/Math.round(Math.floor((Math.random() * 12000) + 5000))
+          /*1*/receiveAm(300,2000), 
+          /*2*/receiveAm(12000,5000),
           
           ];
-            var wrDet = Math.floor(Math.random() * 2);
-            var multAm = Math.round(workAmount[wrDet] + (workAmount[wrDet] / 100) * multiplier);
-            var workRandom= [/*1*/"You worked and got <strong>" + addCommas(workAmount[wrDet] + multAm) + "</strong> coins.",
-                             /*2*/"You stayed in the office for 24 hours, Your boss was satisfied with you work. You got <strong>" 
-                             + addCommas(workAmount[wrDet] + multAm) + "</strong> coins."
+            numSel = Math.floor(Math.random() * 2);
+            var multAm = Math.round(workAmount[numSel] + (workAmount[numSel] / 100) * multiplier);
+            var workRandom = [/*1*/`You worked and got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`,
+                             /*2*/`You stayed in the office for 24 hours, Your boss was satisfied with you work. You got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`
           ]; 
-            document.getElementById("dialogue").innerHTML = workRandom[wrDet];
-            coins += Math.round(workAmount[wrDet] + multAm);
+            delem.innerHTML = workRandom[numSel];
+            coins += Math.round(workAmount[numSel] + multAm);
             update();
          } 
 
         function explore(){
+            numsel = Math.floor(Math.random() * 2);     
             var amount =  Math.round(Math.floor(Math.random() * 5000) + 522 * multiplier);
             var multAm = Math.round((amount / 100) * multiplier);
             document.getElementById("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
             coins += Math.round(amount) + multAm;
             update();   
         }
-        
+       
         function addCommas(x) {
            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -289,10 +299,11 @@ hr {
         function eatCookie(){
               if(cookies > 0){
                  cookies = cookies - 1;
-                 document.getElementById("dialogue").innerHTML = "You ate a cookie."
+                 delem.innerHTML = "You ate a cookie."
+                 
                  update();
               } else if (cookies <= 0) {
-              document.getElementById("dialogue").innerHTML = "YOU DON'T HAVE A COOKIE TO EAT DUMBASS.";
+              delem.innerHTML= "YOU DON'T HAVE A COOKIE TO EAT DUMBASS.";
               }
         }
         
