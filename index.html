@@ -226,7 +226,7 @@ hr {
 
 .username button {
  margin: 0 5 0 5;
- margin-top: 20%; padding:6% 10%;
+ margin-top: 25%; padding:6% 10%;
  background-color: black;
 }
 
@@ -259,7 +259,7 @@ hr {
     </div></header></p>
     <div class="username">
     <span class="usernametext"> USERNAME</span> 
-    <input class="usernameI" type="text" placeholder=" Your username"></input>
+    <input class="usernameI" type="text" placeholder=" Your username" id="userN" value=""></input>
     <button onclick="start()">NEW GAME</button>
     <button onclick="sessionLoad(), start()" class="load">LOAD GAME</button></div>
 <body id="body">
@@ -273,6 +273,7 @@ hr {
         <p id="dialogue">Welcome to <strong>SWAG GAME</strong> !
         <br> (◡ ω ◡)
         <br>THE SAVE AND LOAD FUNCTION IS DOWN BELOW</p>
+        <p id="userName"></p>
     </div>
     <hr> </hr>
     </center>
@@ -308,18 +309,22 @@ hr {
         var cookies = 0;
         var cPrice = 500;
         var multiS= "";
+        var username= null;
         var multiSc= "";
         var numSel = 0;
-        var username = "";
+        
         var delem= document.getElementById("dialogue");
         const myEnergyBar = document.querySelector(".energyBar");
         const blurEff = document.getElementById("blur");
         
         
         function start() {
+                   username = document.getElementById("userN").value;
                    blurEff.setAttribute("style", "filter: blur(0px)"); 
                    document.querySelector(".username").style.display = "none";
                    document.querySelector(".coins").style.display = "block";
+                   console.log(username);
+                   update();
         }
          
         function saveState() {
@@ -337,6 +342,7 @@ hr {
            price = parseInt(localStorage.getItem("price"));
            cookies = parseInt(localStorage.getItem("cookies"));
            username = localStorage.getItem("username");
+          
            update()
         }
         
@@ -394,7 +400,7 @@ hr {
         function updateEnergyBar (test, value) {
           value = Math.round(value);
           
-         test.querySelector(".energyFill").style.width = `${value}%`;
+         test.querySelector(".energyFill").style.width = `${value}%`; 
          test.querySelector(".energyAm").textContent = `${value}%`;
          
         }
@@ -426,7 +432,8 @@ hr {
           multiSc = "";
         } else if (coins >= 1) {
           multiSc = "s";
-        }  
+        }
+        document.getElementById("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
         document.getElementById("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
 
         document.getElementById("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";
