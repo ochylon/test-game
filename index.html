@@ -261,7 +261,7 @@ hr {
     <span class="usernametext"> USERNAME</span> 
     <input class="usernameI" type="text" placeholder=" Your username" id="userN" value=""></input>
     <button onclick="start()">NEW GAME</button>
-    <button onclick="sessionLoad(), start()" class="load">LOAD GAME</button></div>
+    <button onclick="sessionLoad(), closeD()" class="load">LOAD GAME</button></div>
 <body id="body">
 
     <div id="blur"class="blur">
@@ -318,13 +318,17 @@ hr {
         const blurEff = document.getElementById("blur");
         
         
+        function closeD(){
+        
+        blurEff.setAttribute("style", "filter: blur(0px)"); 
+	        document.querySelector(".username").style.display = "none";
+	        document.querySelector(".coins").style.display = "block";
+	        update();
+	    }
+        
         function start() {
                    username = document.getElementById("userN").value;
-                   blurEff.setAttribute("style", "filter: blur(0px)"); 
-                   document.querySelector(".username").style.display = "none";
-                   document.querySelector(".coins").style.display = "block";
-                   console.log(username);
-                   update();
+                   closeD();
         }
          
         function saveState() {
