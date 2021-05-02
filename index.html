@@ -396,7 +396,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
         <button onclick="sessionLoad()" class="load">LOAD</button></div></center>
    </div>  
     <script>
-        var coins = 0;
+        var coins = 0; var claimed = 0;
         var price = 20000;
         var multiplier = 1;
         var cookies = 69;
@@ -447,11 +447,13 @@ only screen and (min-device-pixel-ratio : 1.5) {
            $save("price", price);
            $save("cookies", cookies);
            $save("username", username);
+           $save("claimed", claimed);
         }
         function sessionLoad(){
            if (localStorage.getItem("coins") == null){
            return
            };
+           claimed = parseInt(localStorage.getItem("claimed")
            coins = parseInt(localStorage.getItem("coins"));
            multiplier = parseFloat(localStorage.getItem("multiplier"));         
            price = parseInt(localStorage.getItem("price"));
@@ -578,16 +580,19 @@ only screen and (min-device-pixel-ratio : 1.5) {
 					   
 					   docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>!!! EXHAUSTED !!!</strong>";
 					};
+
 					if (username === "cookiemonsterxD") {
-					
+					if (claimed == false) {
 					
 					
 					cookies = parseInt(localStorage.getItem("cookies")) + 6969;
-						delem.innerHTML = `hello bae, eto na yung cookies mo (. ❛ ᴗ ❛.)<br> You've been given <strong> 6969</strong> cookies by the developer.<br>You now have ${cookies} amount of cookies<br> i love you!!(~￣³￣)~`;
+						delem.innerHTML = `hello bae, eto na yung cookies mo <br>(. ❛ ᴗ ❛.)<br><br>You've been given <strong> 6969</strong> cookies by the developer.<br><br>You now have ${cookies} amount of cookies<br> i love you!!(~￣³￣)~`;
 						
 						docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>" + "!!! IMPORTANT MESSAGE !!!</strong>";
 						docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
-						
+					} if (claimed == true) {
+return
+}	
 			        };
 			        
 			        
