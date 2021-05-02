@@ -448,16 +448,17 @@ only screen and (min-device-pixel-ratio : 1.5) {
            $save("cookies", cookies);
            $save("username", username);
         }
-        
         function sessionLoad(){
-           
+           if (localStorage.getItem("coins") == null){
+           return
+           };
            coins = parseInt(localStorage.getItem("coins"));
            multiplier = parseFloat(localStorage.getItem("multiplier"));         
            price = parseInt(localStorage.getItem("price"));
            cookies = parseInt(localStorage.getItem("cookies"));
            username = localStorage.getItem("username");
           
-           update()
+           update();
         }
         
         function receiveAm(miNcap, maXcap) {
