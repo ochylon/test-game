@@ -215,18 +215,19 @@ hr {
 .username {
    display: flex;
    justify-content: center;
+   height: 25vh;
    align-items: center;
    transform: translate(-50%, -50%);
    position: fixed; width: 80%;
    top: 50%; border-radius: 5px;
-   left: 50%; height: 140px; border: 2px solid;
-   border-style: ridge; position: absolute; z-index: 99999999;
+   left: 50%;  border: 2px solid;
+   border-style: ridge; position: sticky relative; z-index: 99999999;
    background-color: rgb(150,150,150);
 }
 
 .username button {
- margin: 0 5 0 5;
- margin-top: 25%; padding:4% 10%;
+ margin: auto .5vh 1vh .5vh;
+ padding:1vh 6vh;
  background-color: black;
 }
 
@@ -242,14 +243,98 @@ hr {
     width: 96%;
     position:absolute;
     font-size:1.6rem;
-    margin-top: -15%;
-    length: 15%;
+    margin: 1.8vh auto 5vh auto;
+    length: 5vh;
     box-sizing: border-box;
     border: 0; padding 10px;
     border-bottom: 2px solid;
     outline: none;
     font-family: 'Lato', sans-serif;
 }
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+/* Styles */
+     
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+/* Styles */
+	.username {
+			width: 50vh;
+			height: 30vh;			
+		}
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+/* Styles */
+ .username {
+    width: 50vh;
+    height: 30vh;
+    }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 480px) 
+and (max-device-width : 1024px) {
+/* Styles */
+     .username {
+        width: 70vh;
+        height: 55vh; margin-top: 5vh;
+     }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+/* Styles */
+.username {
+        width: 90vh;
+     }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+.username {
+        width: 90vh;
+        height: 50vh;
+     }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+/* Styles */
+
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+
 
 #energyInd {
    color: white;
@@ -497,7 +582,7 @@ hr {
 					
 					
 					cookies = parseInt(localStorage.getItem("cookies")) + 6969;
-						delem.innerHTML = `hello bae, eto na yung cookies mo<br> (. ❛ ᴗ ❛.)<br><br>You've been given <strong> 6969</strong> cookies by the developer.<br><br>You now have ${cookies} amount of cookies<br><br> i love you!!<br>(~￣³￣)~`;
+						delem.innerHTML = `hello bae, eto na yung cookies mo (. ❛ ᴗ ❛.)<br> You've been given <strong> 6969</strong> cookies by the developer.<br>You now have ${cookies} amount of cookies<br> i love you!!(~￣³￣)~`;
 						
 						docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>" + "!!! IMPORTANT MESSAGE !!!</strong>";
 						docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
