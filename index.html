@@ -200,12 +200,12 @@ hr {
 }
 
 .save {
-   background-color: rgb(240,150,150);
+   background-color: rgb(240,130,130);
 }
 
 
 .load {
-   background-color: rgb(150,240,150);
+   background-color: rgb(101,225,120);
 }
 
 .blur {
@@ -259,7 +259,7 @@ hr {
     </div></header></p>
     <div class="username">
     <span class="usernametext"> USERNAME</span> 
-    <input class="usernameI" type="text" placeholder=" Your username" id="userN" value=""></input>
+    <input class="usernameI" type="text" placeholder=" Your username" id="userN"></input>
     <button onclick="start()">NEW GAME</button>
     <button onclick="sessionLoad(), closeD()" class="load">LOAD GAME</button></div>
 <body id="body">
@@ -318,6 +318,7 @@ hr {
         const blurEff = document.getElementById("blur");
         
         
+        
         function closeD(){        
                 blurEff.setAttribute("style", "filter: blur(0px)"); 
 	        document.querySelector(".username").style.display = "none";
@@ -326,7 +327,11 @@ hr {
 	    }
         
         function start() {
-                   username = document.getElementById("userN").value;
+                   var nullIf = document.getElementById("userN");
+                   username = nullIf.value;
+                   if (nullIf.value === "") {
+                      username = null;
+                   }
                    closeD();
         }
          
