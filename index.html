@@ -318,9 +318,8 @@ hr {
         const blurEff = document.getElementById("blur");
         
         
-        function closeD(){
-        
-        blurEff.setAttribute("style", "filter: blur(0px)"); 
+        function closeD(){        
+                blurEff.setAttribute("style", "filter: blur(0px)"); 
 	        document.querySelector(".username").style.display = "none";
 	        document.querySelector(".coins").style.display = "block";
 	        update();
@@ -328,6 +327,9 @@ hr {
         
         function start() {
                    username = document.getElementById("userN").value;
+                   if ("" = document.getElementById("userN").value){
+                   username = null;
+                   }
                    closeD();
         }
          
