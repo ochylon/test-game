@@ -267,12 +267,14 @@ hr {
     <div id="blur"class="blur">
     <br><br><br><br>
     <center>
-        <button onclick= "work()">WORK</button>
-        <button onclick= "explore()" class="explore">EXPLORE</button><hr></hr>
+        <button id="workBtn"onclick= "work()">WORK</button>
+        <button id="exploreBtn" onclick= "explore()" class="explore">EXPLORE</button><hr></hr>
     <div class="divs">
+        <p>---------------------</p>
         <p id="dialogue">Welcome to <strong>SWAG GAME</strong> !
         <br> (◡ ω ◡)
-        <br>THE SAVE AND LOAD FUNCTION IS DOWN BELOW</p>
+        <br>THE SAVE AND LOAD FUNCTION IS NOW IMPLEMENTED</p>
+        <p>---------------------</p>
         <p id="userName"></p>
     </div>
     <hr> </hr>
@@ -308,11 +310,18 @@ hr {
         var multiplier = 1;
         var cookies = 0;
         var cPrice = 500;
-        var multiS= "";
-        var username= null;
-        var multiSc= "";
+        var username = null;
+        var maxEnergy = 900;
+        var energy = 900;
+      /*  var multiS: "";
+        var multiSc= "";*/
         var numSel = 0;
+        var docId = function (id) { return document.getElementById(id); } ;
+        var buttons = [docId("workBtn"),
+        docId("exploreBtn"),
+        ];
         
+        var percentageCal = 0;
         var delem= document.getElementById("dialogue");
         const myEnergyBar = document.querySelector(".energyBar");
         const blurEff = document.getElementById("blur");
@@ -370,9 +379,14 @@ hr {
             var multAm = Math.round((workAmount[numSel] / 100) * multiplier);
             var workRandom = [/*1*/`You worked and got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`,
                              /*2*/`You stayed in the office for 24 hours, Your boss was satisfied with you work. You got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`
-          ]; 
+          ];
+            var energySp = [100, 600
+             
+          ];
             delem.innerHTML = workRandom[numSel];
             coins += Math.round(workAmount[numSel] + multAm);
+            energy -= energySp[numSel];
+            console.log(energySp[numSel]);
             update();
          } 
 
@@ -427,7 +441,9 @@ hr {
         function eatCookie(){
               if(cookies > 0){
                  cookies = cookies - 1;
-                 delem.innerHTML = "You ate a cookie."
+                 delem.innerHTML = "You ate a cookie and replenished a bit of your energy.";
+                 energy += maxEnergy / 100 * 20;
+                 
                  
                  update();
               } else if (cookies <= 0) {
@@ -436,20 +452,37 @@ hr {
         }
         
         function update(){
-        if(coins < 1){ 
-          multiSc = "";
-        } else if (coins >= 1) {
-          multiSc = "s";
+			        if(coins < 1){ 
+			          multiSc = "";
+			        } else if (coins >= 1) {
+			          multiSc = "s";
+			        }
+			        
+			        document.getElementById("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
+			        document.getElementById("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
+			
+			        docId("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";			
+			        docId("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
+			        docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
+			         percentageCal = (energy / maxEnergy) * 100;         
+						        if (energy > maxEnergy) {
+						             energy = maxEnergy;
+						             updateEnergyBar(myEnergyBar, 100);
+						        } else  if (energy > 0){updateEnergyBar(myEnergyBar, percentageCal);
+							        console.log(energy + " energy") ;
+						        for( var i = 0; i < buttons.length; i++) {
+							        buttons[i].disabled = false;
+						        }
+						        } else if (energy < 0) { energy = 0; 
+							        percentageCal = 0;  updateEnergyBar(myEnergyBar, percentageCal);
+							        delem.innerHTML = "Replenish your energy by eating cookies.";
+							     	    				   
+							    for( var i = 0; i < buttons.length; i++) {
+									    buttons[i].disabled = true;	    
+							    }
+		 
         }
-        document.getElementById("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
-        document.getElementById("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
-
-        document.getElementById("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";
-
-        document.getElementById("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
-        document.getElementById("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
-        updateEnergyBar(myEnergyBar, 90);
-        }
+      };
     </script>
 </center>
 </body>
