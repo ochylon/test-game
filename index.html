@@ -264,7 +264,7 @@ hr {
     <div class="username">
     <span class="usernametext"> USERNAME</span> 
     <input class="usernameI" type="text" placeholder=" Your username" id="userN"></input>
-    <button onclick="start()">NEW GAME</button>
+    <button onclick="newGame()">NEW GAME</button>
     <button onclick="sessionLoad(), closeD()" class="load">LOAD GAME</button></div>
 <body id="body">
 
@@ -274,10 +274,12 @@ hr {
         <button id="workBtn"onclick= "work()">WORK</button>
         <button id="exploreBtn" onclick= "explore()" class="explore">EXPLORE</button><hr></hr>
     <div class="divs">
+        <p id="impNotice">Welcome to <strong>XD DEMO GAME</strong> !</p>
         <p>---------------------</p>
-        <p id="dialogue">Welcome to <strong>SWAG GAME</strong> !
-        <br> (◡ ω ◡)
-        <br>THE SAVE AND LOAD FUNCTION IS NOW IMPLEMENTED</p>
+        <p id="dialogue">
+        (◡ ω ◡)
+        <br>THE SAVE AND LOAD FUNCTION ARE NOW IMPLEMENTED TO THE GAME<br><br> DON'T FORGET TO SAVE YOUR PROGRESS!!!
+        <br><br>You also get free 69 cookies<br> for trying out the game!</p>
         <p>---------------------</p>
         <p id="userName"></p>
     </div>
@@ -312,23 +314,27 @@ hr {
         var coins = 0;
         var price = 20000;
         var multiplier = 1;
-        var cookies = 0;
+        var cookies = 69;
         var cPrice = 500;
         var username = null;
         var maxEnergy = 900;
         var energy = 900;
+        var notice ="";
+        var start = 0;
+        
       /*  var multiS: "";
         var multiSc= "";*/
         var numSel = 0;
         var docId = function (id) { return document.getElementById(id); } ;
+        var $save = function (id, value) { return localStorage.setItem(id, value)} ;
         var buttons = [docId("workBtn"),
         docId("exploreBtn"),
         ];
         
         var percentageCal = 0;
-        var delem= document.getElementById("dialogue");
+        var delem= docId("dialogue");
         const myEnergyBar = document.querySelector(".energyBar");
-        const blurEff = document.getElementById("blur");
+        const blurEff = docId("blur");
      
         function oTh(val, min, max) {
 			    return val < min ? min : (val > max ? max : val);
@@ -341,8 +347,8 @@ hr {
 	        update();
 	    }
         
-        function start() {
-                   var nullIf = document.getElementById("userN");
+        function newGame() {
+                   var nullIf = docId("userN");
                    username = nullIf.value;
                    if (nullIf.value === "") {
                       username = null;
@@ -351,11 +357,11 @@ hr {
         }
          
         function saveState() {
-           localStorage.setItem("coins", coins);
-           localStorage.setItem("multiplier", multiplier);
-           localStorage.setItem("price", price);
-           localStorage.setItem("cookies", cookies);
-           localStorage.setItem("username", username);
+           $save("coins", coins);
+           $save("multiplier", multiplier);
+           $save("price", price);
+           $save("cookies", cookies);
+           $save("username", username);
         }
         
         function sessionLoad(){
@@ -402,7 +408,7 @@ hr {
             numsel = Math.floor(Math.random() * 2);     
             var amount =  Math.round(Math.floor(Math.random() * 5000) + 522 * multiplier);
             var multAm = Math.round((amount / 100) * multiplier);
-            document.getElementById("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
+            docId("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
             coins += Math.round(amount) + multAm;
             energy -= 100;
             update();}
@@ -468,9 +474,11 @@ hr {
 			        } else if (coins >= 1) {
 			          multiSc = "s";
 			        }
-			        
-			        document.getElementById("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
-			        document.getElementById("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
+			        start++;
+			        if (start == 1){docId("impNotice").innerHTML = "Welcome to <strong>XD DEMO GAME</strong> !";}
+			        else if (start > 1) {docId("impNotice").innerHTML = notice;}
+			        docId("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
+			        docId("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
 					
 			        docId("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";			
 			        docId("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
@@ -479,7 +487,24 @@ hr {
 			        percentageCal = oTh((energy / maxEnergy) * 100, 0, 100); 
 				    docId("energyInd").innerHTML = `ENERGY ${energy}/${maxEnergy}`;
 					updateEnergyBar(myEnergyBar, percentageCal);
-						         
+					if (energy === 0){
+					   delem.innerHTML = "You are already tired. Eat some cookies to replenish a portion of your energy.";
+					   
+					   docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>!!! EXHAUSTED !!!</strong>";
+					};
+					if (username === "cookiemonsterxd") {
+					
+					
+					
+					cookies = parseInt(localStorage.getItem("cookies")) + 6969;
+						delem.innerHTML = `hello bae, eto na yung cookies mo (. ❛ ᴗ ❛.)<br> You've been given <strong> 6969</strong> cookies by the developer.<br>You now have ${cookies} amount of cookies<br> i love you!!(~￣³￣)~`;
+						
+						docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>" + "!!! IMPORTANT MESSAGE !!!</strong>";
+						docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
+						
+			        };
+			        
+			        
 		 
         
       };
