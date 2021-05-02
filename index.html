@@ -251,6 +251,10 @@ hr {
     font-family: 'Lato', sans-serif;
 }
 
+#energyInd {
+   color: white;
+     
+}
 </style>
 
     <header class="header"><h3 class="title">XD</h3><p class="demotext"><strong>DEMO!</strong>
@@ -280,7 +284,7 @@ hr {
     <hr> </hr>
     </center>
       
-      <br> <div class="energyBar">
+      <br> <strong id ="energyInd">ENERGY 900/900 </strong><div class="energyBar">
       <div class="energyFill"></div>
       <span class="energyAm">0%</span>
       </div>
@@ -325,8 +329,10 @@ hr {
         var delem= document.getElementById("dialogue");
         const myEnergyBar = document.querySelector(".energyBar");
         const blurEff = document.getElementById("blur");
-        
-        
+     
+        function oTh(val, min, max) {
+			    return val < min ? min : (val > max ? max : val);
+        }
         
         function closeD(){        
                 blurEff.setAttribute("style", "filter: blur(0px)"); 
@@ -370,6 +376,7 @@ hr {
         
         
         function work() {
+         if (energy > 0) {
          var workAmount= [
           /*1*/receiveAm(300,2000), 
           /*2*/receiveAm(12000,5000),
@@ -385,18 +392,20 @@ hr {
           ];
             delem.innerHTML = workRandom[numSel];
             coins += Math.round(workAmount[numSel] + multAm);
-            energy -= energySp[numSel];
+            energy = oTh(energy - energySp[numSel],0,maxEnergy);
             console.log(energySp[numSel]);
-            update();
+            update();}
          } 
 
         function explore(){
+            if (energy > 0) {
             numsel = Math.floor(Math.random() * 2);     
             var amount =  Math.round(Math.floor(Math.random() * 5000) + 522 * multiplier);
             var multAm = Math.round((amount / 100) * multiplier);
             document.getElementById("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
             coins += Math.round(amount) + multAm;
-            update();   
+            energy -= 100;
+            update();}
         }
        
         function addCommas(x) {
@@ -416,6 +425,7 @@ hr {
            delem.innerHTML = `You upgraded your multiplier for <strong> ${addCommas(price)} </strong> coins.`;
            price = Math.round((multiCap * 1.5) * price);
            update();
+           
            }
         }
         
@@ -440,15 +450,16 @@ hr {
         
         function eatCookie(){
               if(cookies > 0){
+                 if (energy == maxEnergy){
+                    delem.innerHTML = "You're already full, you can't eat more cookies.";
+                 } else {
                  cookies = cookies - 1;
                  delem.innerHTML = "You ate a cookie and replenished a bit of your energy.";
                  energy += maxEnergy / 100 * 20;
-                 
-                 
-                 update();
+                 update(); }
               } else if (cookies <= 0) {
               delem.innerHTML= "YOU DON'T HAVE A COOKIE TO EAT DUMBASS.";
-              }
+              } 
         }
         
         function update(){
@@ -460,28 +471,17 @@ hr {
 			        
 			        document.getElementById("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
 			        document.getElementById("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
-			
+					
 			        docId("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";			
 			        docId("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
 			        docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
-			         percentageCal = (energy / maxEnergy) * 100;         
-						        if (energy > maxEnergy) {
-						             energy = maxEnergy;
-						             updateEnergyBar(myEnergyBar, 100);
-						        } else  if (energy > 0){updateEnergyBar(myEnergyBar, percentageCal);
-							        console.log(energy + " energy") ;
-						        for( var i = 0; i < buttons.length; i++) {
-							        buttons[i].disabled = false;
-						        }
-						        } else if (energy < 0) { energy = 0; 
-							        percentageCal = 0;  updateEnergyBar(myEnergyBar, percentageCal);
-							        delem.innerHTML = "Replenish your energy by eating cookies.";
-							     	    				   
-							    for( var i = 0; i < buttons.length; i++) {
-									    buttons[i].disabled = true;	    
-							    }
+			        energy = oTh(energy,0,maxEnergy);
+			        percentageCal = oTh((energy / maxEnergy) * 100, 0, 100); 
+				    docId("energyInd").innerHTML = `ENERGY ${energy}/${maxEnergy}`;
+					updateEnergyBar(myEnergyBar, percentageCal);
+						         
 		 
-        }
+        
       };
     </script>
 </center>
