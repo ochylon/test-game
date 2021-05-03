@@ -149,6 +149,7 @@ hr {
 
 .cookies {
    color: rgba(240, 100, 50, 255);
+   
 }
 
 .cookieRow {
@@ -164,8 +165,9 @@ hr {
    font-size: 16px;
    padding: 15px 32px;
    margin: 10px 1px;
+   margin-right: 10px;
    width: 99px;
-   float: center;
+   float: right;
 }
 
 .cookieBut:after {
@@ -252,12 +254,17 @@ hr {
     font-family: 'Lato', sans-serif;
 }
 
+.cookieImg {
+   height: 15vh; width: 15vh; position: absolute;
+   background-color: transparent; margin-top: 8px;
+   margin-left: 10px; float: left; display: grid;
+}
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
 /* Styles */
-     
 }
 
 /* Smartphones (landscape) ----------- */
@@ -286,7 +293,7 @@ and (min-device-width : 480px)
 and (max-device-width : 1024px) {
 /* Styles */
      .username {
-        width: 70vh;
+        width: 50vh;
         height: 55vh; margin-top: 5vh;
      }
 }
@@ -309,7 +316,7 @@ and (max-device-width : 1024px)
 and (orientation : portrait) {
 /* Styles */
 .username {
-        width: 90vh;
+        width: 70vh;
         height: 50vh;
      }
 }
@@ -375,21 +382,21 @@ only screen and (min-device-pixel-ratio : 1.5) {
       <div class="energyFill"></div>
       <span class="energyAm">0%</span>
       </div>
-      
+      <br>
+      <div style= "background-color:black; height: 149px; padding: 5.6px; border-radius: 5px; position: relative;">
+      <img src="cookie_20210502225446.png" class="cookieImg"></img>
+      <p style="color:white; text-align:right; margin-right:35px;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
+      <div class="cookieRow">
+      <button onclick="cookCookie()" id="cookieCook" class="cookieBut" style="width: 100px;">COOK</button>
+      <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
+      <p style=" height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
         
       <br>
     <center>  <div style= "position: relative; margin-right:1px;background-color:black; height: 149px; padding: 5.6px; border-radius: 5px;">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
-        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p></div><br> <br>
+        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p></div><br>
         
-        <div style= "background-color:black; height: 150px; padding: 5.6px; border-radius: 5px;">
-        <img src="cookie.png"></img>
-        <p style="color:white;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
-        <div class="cookieRow">
-        <button onclick="cookCookie()" id="cookieCook" class="cookieBut" style="width: 100px;">COOK</button>
-        <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
-        <p style=" height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
         </body>
         
         
@@ -480,7 +487,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
             var workRandom = [/*1*/`You worked and got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`,
                              /*2*/`You stayed in the office for 24 hours, Your boss was satisfied with you work. You got <strong> ${addCommas(workAmount[numSel] + multAm)} </strong> coins.`
           ];
-            var energySp = [100, 600
+            var energySp = [50, 300
              
           ];
             delem.innerHTML = workRandom[numSel];
@@ -578,22 +585,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
 					   delem.innerHTML = "You are already tired. Eat some cookies to replenish a portion of your energy.";
 					   
 					   docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>!!! EXHAUSTED !!!</strong>";
-					};
-					/*if (username === "cookiemonsterxD") {
-					
-					
-					
-					cookies = parseInt(localStorage.getItem("cookies")) + 6969;
-						delem.innerHTML = `hello bae, eto na yung cookies mo (. ❛ ᴗ ❛.)<br> You've been given <strong> 6969</strong> cookies by the developer.<br>You now have ${cookies} amount of cookies<br> i love you!!(~￣³￣)~`;
-						
-						docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>" + "!!! IMPORTANT MESSAGE !!!</strong>";
-						docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
-						
-			        };*/
-			        
-			        
-		 
-        
+					};					      
       };
     </script>
 </center>
