@@ -31,15 +31,18 @@ body {
 
 .energyBar {
   position: relative;
+  display: grid; float: bottom;
   border-radius: 5px;
   height: 21px;
   background-color: rgb(120,50,50);
   overflow: hidden;
+  
+  margin-left: 10px;margin-right: 10px;
 }
 
 .energyFill {
   height: 100%;
-  width: 10%;
+  width: 10%; position: absolute;
   background: rgb(249,71,71);
   transition: all 1s;
 }
@@ -50,14 +53,14 @@ body {
   transform: translateY(-50%);
   font: bold;
   position: absolute; 
-  color: white;
+  color: white; font-weight: 700;
 }
 
 .header {
   position: fixed;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: black; 
   height:65px;
   color: white;
   top: 0;
@@ -128,7 +131,7 @@ button {
     margin-top: 10px;
     margin-right: 10px; 
     background-color: #1c1d1c;
-    color:white; transition:transform 1s;
+    color:white; transition:all 1s;
     float: right;
     border-radius: 5px; 
     border-style: ridge;
@@ -255,7 +258,7 @@ hr {
 }
 
 .cookieImg {
-   height: 15vh; width: 15vh; position: absolute;
+   height: 80px; width: 80px; position: absolute;
    background-color: transparent; margin-top: 8px;
    margin-left: 10px; float: left; display: grid;
 }
@@ -378,13 +381,19 @@ only screen and (min-device-pixel-ratio : 1.5) {
 
 #energyInd {
    color: white;
-     
+   margin: 10px;  position: absolute;
 }
 
 #contentMisc {
 	height: 200px;
 	background-color: black;				
 }
+
+.energydiv {
+   background-color:black; height: 70px;
+   position:relative; border-radius:3px;
+}
+
 
 </style>
 
@@ -400,6 +409,17 @@ only screen and (min-device-pixel-ratio : 1.5) {
 <body id="body">
     <div id="blur"class="blur">
     <br><br><br><br>
+    
+    <div class="energydiv">
+    <strong id ="energyInd">ENERGY 900/900 </strong>
+    <br> <br>
+	    <div class="energyBar">
+		    <div class="energyFill"></div>
+			    <span class="energyAm">0%</span>
+    </div></div>
+    
+    <br style="font-size:10px;"> 
+    
     <center>
         <button id="workBtn"onclick= "work()">WORK</button>
         <button id="exploreBtn" onclick= "explore()" class="explore">EXPLORE</button><hr></hr>
@@ -416,10 +436,6 @@ only screen and (min-device-pixel-ratio : 1.5) {
     <hr> </hr>
     </center>
       
-      <br> <strong id ="energyInd">ENERGY 900/900 </strong><div class="energyBar">
-      <div class="energyFill"></div>
-      <span class="energyAm">0%</span>
-      </div>
       <br>
       <div class="tab">
       <button class="tablinks" id="foodTab" onclick="openTab(event,'contentFood')">FOOD</button>
