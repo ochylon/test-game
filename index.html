@@ -100,7 +100,7 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1rem;
     outline: none;
     cursor: pointer;
     border-style: ridge;
@@ -128,7 +128,7 @@ button {
     margin-top: 10px;
     margin-right: 10px; 
     background-color: #1c1d1c;
-    color:white; 
+    color:white; transition:transform 1s;
     float: right;
     border-radius: 5px; 
     border-style: ridge;
@@ -162,7 +162,7 @@ hr {
 
 .cookieBut {
    display: in-line-block;
-   font-size: 16px;
+   font-size: 1rem;
    padding: 15px 32px;
    margin: 10px 1px;
    margin-right: 10px;
@@ -246,9 +246,9 @@ hr {
     position:absolute;
     font-size:1.6rem;
     margin: 1.8vh auto 5vh auto;
-    length: 5vh;
+    length: 5vh; 
     box-sizing: border-box;
-    border: 0; padding 10px;
+    border: 0; padding: 6px;
     border-bottom: 2px solid;
     outline: none;
     font-family: 'Lato', sans-serif;
@@ -258,6 +258,36 @@ hr {
    height: 15vh; width: 15vh; position: absolute;
    background-color: transparent; margin-top: 8px;
    margin-left: 10px; float: left; display: grid;
+}
+
+.tab {
+   overflow:hidden; width: 100%; height:45.5px;
+   border-radius:3px 3px 0 0; padding: 0 0 0 0;
+}
+
+.tab button {
+   padding: 15px; border-radius: 3px 3px 0 0;
+   width: 20%; margin:0 0 0 0; float: left;
+}
+
+.tab #foodTab {
+  background-color: rgb(169,124, 69);
+}
+
+.tab #upgrTab {
+  width: 30%;
+}
+
+.tab #miscTab {
+  width: 50%; background-color:rgb(100,200,200);
+  border-radius:3px 3px 0 0;
+}
+
+.tab button.active {
+
+}
+
+.tabcontent {
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -272,8 +302,11 @@ and (max-device-width : 480px) {
 and (min-width : 321px) {
 /* Styles */
 	.username {
-			width: 50vh;
-			height: 30vh;			
+			width: 70vw;
+			height: 35vh;			
+		}
+		.usernameI {
+		     height: 8vh;
 		}
 }
 
@@ -347,6 +380,12 @@ only screen and (min-device-pixel-ratio : 1.5) {
    color: white;
      
 }
+
+#contentMisc {
+	height: 200px;
+	background-color: black;				
+}
+
 </style>
 
     <header class="header"><h3 class="title">XD</h3><p class="demotext"><strong>DEMO!</strong>
@@ -359,7 +398,6 @@ only screen and (min-device-pixel-ratio : 1.5) {
     <button onclick="newGame()">NEW GAME</button>
     <button onclick="sessionLoad(), closeD()" class="load">LOAD GAME</button></div>
 <body id="body">
-
     <div id="blur"class="blur">
     <br><br><br><br>
     <center>
@@ -383,20 +421,29 @@ only screen and (min-device-pixel-ratio : 1.5) {
       <span class="energyAm">0%</span>
       </div>
       <br>
-      <div style= "background-color:black; height: 149px; padding: 5.6px; border-radius: 5px; position: relative;">
-      <img src="cookie_20210502225446.png" class="cookieImg"></img>
-      <p style="color:white; text-align:right; margin-right:35px;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
-      <div class="cookieRow">
-      <button onclick="cookCookie()" id="cookieCook" class="cookieBut" style="width: 100px;">COOK</button>
-      <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
-      <p style=" height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p></div></center>
+      <div class="tab">
+      <button class="tablinks" id="foodTab" onclick="openTab(event,'contentFood')">FOOD</button>
+      <button class="tablinks" id="upgrTab" onclick="openTab(event,'contentUpgrades')">UPGRADES</button>
+      <button class="tablinks" id="miscTab" onclick="openTab(event, 'contentMisc')">MISCELLANEOUS</button>
+      
+      </div>
+      <div id="contentFood" class="tabcontent defaultcontent"style= "display: none; background-color:black; height: 149px; padding: 5.6px; border-radius: 5px; position: relative;">
+		      <img src="cookie_20210502225446.png" class="cookieImg"></img>
+		      <p style="color:white; text-align:right; margin-right:35px;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
+		      <div class="cookieRow">
+		      <button onclick="bakeCookie()" id="cookieBake" class="cookieBut" style="width: 100px;">BAKE</button>
+		      <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
+		      <p style=" height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p>
+      </div></center>
         
-      <br>
-    <center>  <div style= "position: relative; margin-right:1px;background-color:black; height: 149px; padding: 5.6px; border-radius: 5px;">
+      
+    <center>  <div id="contentUpgrades" class="tabcontent" style= "display: none;position: relative; margin-right:1px;background-color:black; height: 149px; padding: 5.6px; border-radius: 5px;">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
-        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p></div><br>
-        
+        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p></div>
+         
+         <div id="contentMisc" class="tabcontent"></div>
+         
         </body>
         
         
@@ -537,7 +584,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
          
         }
         
-        function cookCookie(){
+        function bakeCookie(){
              if (coins < cPrice) {
                  return
              } else if (coins > cPrice){
@@ -561,6 +608,27 @@ only screen and (min-device-pixel-ratio : 1.5) {
               delem.innerHTML= "YOU DON'T HAVE A COOKIE TO EAT DUMBASS.";
               } 
         }
+        console.log(document.getElementsByClassName("tabcontent"))
+       function openTab(evt, tabName){
+			   
+		        var i, tabcontent, tablinks;
+		        
+		      tabcontent = document.getElementsByClassName("tabcontent");
+		        for (i = 0; i < tabcontent.length; i++){
+		        tabcontent[i].style.display = "none";
+		        };
+		        
+		        tablinks = document.getElementsByClassName("tablinks");
+		        for (i = 0; i < tablinks.length; i++){
+		              tablinks[i].className = tablinks[i].className.replace(" active", "");
+		        };
+		        
+		        docId(tabName).style.display = "block";
+		        evt.currentTarget.className += " active";
+		        
+		 }
+        
+        document.getElementById("foodTab").click();
         
         function update(){
 			        if(coins < 1){ 
@@ -582,8 +650,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
 				    docId("energyInd").innerHTML = `ENERGY ${energy}/${maxEnergy}`;
 					updateEnergyBar(myEnergyBar, percentageCal);
 					if (energy === 0){
-					   delem.innerHTML = "You are already tired. Eat some cookies to replenish a portion of your energy.";
-					   
+					   delem.innerHTML = "You are already tired. Eat some cookies to replenish a portion of your energy.";					   
 					   docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>!!! EXHAUSTED !!!</strong>";
 					};					      
       };
