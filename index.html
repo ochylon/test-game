@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <title>beta-test-game</title></head>
 </head>
+
 <style>
 :root {
     font-family: 'Lato', sans-serif;
@@ -220,7 +221,7 @@ hr {
 .username {
    display: flex;
    justify-content: center;
-   height: 25vh;
+   min-height: 35vh;
    align-items: center;
    transform: translate(-50%, -50%);
    position: fixed; width: 80%;
@@ -234,6 +235,7 @@ hr {
  margin: auto .5vh 1vh .5vh;
  padding:1vh 6vh;
  background-color: black;
+ width: 50%;
 }
 
 .usernametext {
@@ -247,7 +249,7 @@ hr {
     border-radius: 5px;
     width: 96%;
     position:absolute;
-    font-size:1.6rem;
+    font-size:4.5vh;
     margin: 1.8vh auto 5vh auto;
     length: 5vh; 
     box-sizing: border-box;
@@ -305,8 +307,8 @@ and (max-device-width : 480px) {
 and (min-width : 321px) {
 /* Styles */
 	.username {
-			width: 70vw;
-			height: 35vh;			
+			width: minmax(400px, 70vw);
+			height: minmax(1000000px, 35vh);			
 		}
 		.usernameI {
 		     height: 8vh;
@@ -390,7 +392,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
 }
 
 .energydiv {
-   background-color:black; height: 70px;
+   background-color:black; height: 65px;
    position:relative; border-radius:3px;
 }
 
@@ -411,6 +413,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
     <br><br><br><br>
     
     <div class="energydiv">
+    
     <strong id ="energyInd">ENERGY 900/900 </strong>
     <br> <br>
 	    <div class="energyBar">
@@ -467,16 +470,16 @@ only screen and (min-device-pixel-ratio : 1.5) {
         <button onclick="sessionLoad()" class="load">LOAD</button></div></center>
    </div>  
     <script>
-        var coins = 0;
-        var price = 20000;
-        var multiplier = 1;
-        var cookies = 69;
-        var cPrice = 500;
-        var username = null;
-        var maxEnergy = 900;
-        var energy = 900;
-        var notice ="";
-        var start = 0;
+        var coins = 0,
+         price = 20000,
+         multiplier = 1,
+        cookies = 69,
+        cPrice = 500,
+        username = null,
+        maxEnergy = 900,
+        energy = 900,
+         notice ="",
+        start = 0;
         
       /*  var multiS: "";
         var multiSc= "";*/
@@ -512,6 +515,23 @@ only screen and (min-device-pixel-ratio : 1.5) {
                    closeD();
         }
          
+         function sessionLoad(){
+         if (localStorage.getItem("coins") == null){
+         return
+         };
+         coins = parseInt(localStorage.getItem("coins"));
+         multiplier = parseFloat(localStorage.getItem("multiplier"));         
+         price = parseInt(localStorage.getItem("price"));
+         cookies = parseInt(localStorage.getItem("cookies"));
+         username = localStorage.getItem("username");
+         
+         blurEff.setAttribute("style", "filter: blur(0px)"); 
+         document.querySelector(".username").style.display = "none";
+         document.querySelector(".coins").style.display = "block";
+         update();
+         
+         }
+         
         function saveState() {
            $save("coins", coins);
            $save("multiplier", multiplier);
@@ -519,18 +539,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
            $save("cookies", cookies);
            $save("username", username);
         }
-        function sessionLoad(){
-           if (localStorage.getItem("coins") == null){
-           return
-           };
-           coins = parseInt(localStorage.getItem("coins"));
-           multiplier = parseFloat(localStorage.getItem("multiplier"));         
-           price = parseInt(localStorage.getItem("price"));
-           cookies = parseInt(localStorage.getItem("cookies"));
-           username = localStorage.getItem("username");
-          
-           update();
-        }
+        
         
         function receiveAm(miNcap, maXcap) {
            
@@ -624,7 +633,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
               delem.innerHTML= "YOU DON'T HAVE A COOKIE TO EAT DUMBASS.";
               } 
         }
-        console.log(document.getElementsByClassName("tabcontent"))
+        
        function openTab(evt, tabName){
 			   
 		        var i, tabcontent, tablinks;
@@ -670,6 +679,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
 					   docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>!!! EXHAUSTED !!!</strong>";
 					};					      
       };
+      sessionLoad();
     </script>
 </center>
 </body>
