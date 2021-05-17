@@ -12,7 +12,7 @@
 <style>
 :root {
     font-family: 'Lato', sans-serif;
-    font-size: 16px;
+    font-size: 13px;
     outline: none ;
 
 }
@@ -25,6 +25,7 @@
 
 body {
    background-color: #3D405B;
+   padding: 60px 10px 10px 10px;
    
 } 
 #body { /*  filter: blur(2px); */
@@ -62,7 +63,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: black; 
-  height:65px;
+  height:58px;
   color: white;
   top: 0;
   left: 0;
@@ -100,7 +101,7 @@ button {
     background-color: rgb(101,225,120);
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 15px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -167,7 +168,7 @@ hr {
 .cookieBut {
    display: in-line-block;
    font-size: 1rem;
-   padding: 15px 32px;
+   padding: 15px 25px;
    margin: 10px 1px;
    margin-right: 10px;
    width: 99px;
@@ -196,7 +197,7 @@ hr {
 
 
 .slfunc {
-  width: 250px;
+  padding:3px;
   border-radius: 5px;
   background-color: black;
 }
@@ -293,6 +294,7 @@ hr {
 }
 
 .tabcontent {
+border-radius: 0 0 3px 3px;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -410,7 +412,6 @@ only screen and (min-device-pixel-ratio : 1.5) {
     <button onclick="sessionLoad(), closeD()" class="load">LOAD GAME</button></div>
 <body id="body">
     <div id="blur"class="blur">
-    <br><br><br><br>
     
     <div class="energydiv">
     
@@ -439,24 +440,25 @@ only screen and (min-device-pixel-ratio : 1.5) {
     <hr> </hr>
     </center>
       
-      <br>
+       <center> <br>
+       
       <div class="tab">
       <button class="tablinks" id="foodTab" onclick="openTab(event,'contentFood')">FOOD</button>
       <button class="tablinks" id="upgrTab" onclick="openTab(event,'contentUpgrades')">UPGRADES</button>
       <button class="tablinks" id="miscTab" onclick="openTab(event, 'contentMisc')">MISCELLANEOUS</button>
       
       </div>
-      <div id="contentFood" class="tabcontent defaultcontent"style= "display: none; background-color:black; height: 149px; padding: 5.6px; border-radius: 5px; position: relative;">
+      <div id="contentFood" class="tabcontent defaultcontent"style= "display: none; background-color:black; height: 149px; padding: 5.6px; position: relative;">
 		      <img src="cookie_20210502225446.png" class="cookieImg"></img>
 		      <p style="color:white; text-align:right; margin-right:35px;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
 		      <div class="cookieRow">
-		      <button onclick="bakeCookie()" id="cookieBake" class="cookieBut" style="width: 100px;">BAKE</button>
+		      <button onclick="bakeCookie()" id="cookieBake" class="cookieBut" >BAKE</button>
 		      <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
 		      <p style=" height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p>
-      </div></center>
+      </div>
         
       
-    <center>  <div id="contentUpgrades" class="tabcontent" style= "display: none; position: relative; margin-right:1px;background-color:black;  padding: 5.6px 5.6px 1px 5.6px; border-radius: 5px;">
+    <div id="contentUpgrades" class="tabcontent" style= "display: none; position: relative; background-color:black;  padding: 5.6px 5.6px 1px 5.6px;">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
         <p style="color:white;" id="price" class="multiPrice">20,000 coins</p><div style="background-color:white; height: 10px; border-radius: 5px;"></div>
