@@ -268,16 +268,18 @@ hr {
 
 .tab {
    overflow:hidden; width: 100%; height:45.5px;
-   border-radius:3px 3px 0 0; padding: 0 0 0 0;
+   border-radius:10px 10px 0 0; padding: 0 0 0 0;
 }
 
 .tab button {
-   padding: 15px; border-radius: 3px 3px 0 0;
+   padding: 15px; border-radius: 0 0 0 0;
    width: 20%; margin:0 0 0 0; float: left;
+   border: 3px solid black;
 }
 
 .tab #foodTab {
   background-color: rgb(169,124, 69);
+  border-radius: 10px 0 0 0;
 }
 
 .tab #upgrTab {
@@ -286,7 +288,7 @@ hr {
 
 .tab #miscTab {
   width: 50%; background-color:rgb(100,200,200);
-  border-radius:3px 3px 0 0;
+  border-radius: 0 10px 0 0;
 }
 
 .tab button.active {
@@ -519,7 +521,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
                    var nullIf = docId("userN");
                    username = nullIf.value;
                    if (nullIf.value === "") {
-                      username = null;
+                      alert("PUT A USERNAME")
+                      return
                    }
                    closeD();
         }
@@ -646,7 +649,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
              if (coins < cPrice) {
                  delem.innerHTML = "You don't have enough money to bake more cookies.";
                  return
-             } else if (coins > cPrice){
+             } else if (coins => cPrice){
                 delem.innerHTML = "You baked <strong> 1 </strong> cookie.";
                 coins -= cPrice;
                 cookies++;
@@ -706,9 +709,9 @@ only screen and (min-device-pixel-ratio : 1.5) {
 			        docId("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";			
 			        docId("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
 			        docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
-			        energy = oTh(energy,0,maxEnergy);
+			        energy = Math.round(oTh(energy,0,maxEnergy));
 			        percentageCal = oTh((energy / maxEnergy) * 100, 0, 100); 
-				    docId("energyInd").innerHTML = `ENERGY ${energy}/${maxEnergy}`;
+				    docId("energyInd").innerHTML = `ENERGY ${energy} / ${maxEnergy}`;
 					updateEnergyBar(myEnergyBar, percentageCal);
 					if (energy === 0){
 					   delem.innerHTML = "You are already tired. Eat some cookies to replenish a portion of your energy.";					   
@@ -721,7 +724,12 @@ only screen and (min-device-pixel-ratio : 1.5) {
 					}
 										      
       };
-      sessionLoad();
+      
+      sessionLoad ();
+      if (localStorage.getItem("username") == "null") {
+      blurEff.setAttribute("style", "filter: blur(1px)"); 
+      document.querySelector(".username").style.display = "flex";
+      }
     </script>
 </center>
 </body>
