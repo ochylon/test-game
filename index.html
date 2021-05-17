@@ -136,7 +136,7 @@ button {
     float: right;
     border-radius: 5px; 
     border-style: ridge;
-    font-size: .85rem; display: none;
+    font-size: .85rem; display: none; 
 }
 
 hr {
@@ -456,12 +456,17 @@ only screen and (min-device-pixel-ratio : 1.5) {
       </div></center>
         
       
-    <center>  <div id="contentUpgrades" class="tabcontent" style= "display: none;position: relative; margin-right:1px;background-color:black; height: 149px; padding: 5.6px; border-radius: 5px;">
+    <center>  <div id="contentUpgrades" class="tabcontent" style= "display: none; position: relative; margin-right:1px;background-color:black;  padding: 5.6px 5.6px 1px 5.6px; border-radius: 5px;">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
-        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p></div>
+        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p><div style="background-color:white; height: 10px; border-radius: 5px;"></div>
+          <div id="energydiv"><p style="color:white;" id="currentMulti">Upgrade your <strong>Energy</strong>.</p>
+         <button style="background: rgb(200,100,100);"onclick="upgradeEnergy()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
+         <p style="color:white; background:  rgb(240,130,130);" id="energyprice" class="multiPrice">20,000 coins</p></div></div>
          
-         <div id="contentMisc" class="tabcontent"></div>
+         <div id="contentMisc" class="tabcontent"><br>
+         <span style="color: white; align-items:center;">NOTHING HERE YET</span>
+         </div>
          
         </body>
         
@@ -480,6 +485,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
         energy = 900,
          notice ="",
         start = 0;
+        
+        let energyprice = 10000;
         
       /*  var multiS: "";
         var multiSc= "";*/
@@ -524,6 +531,11 @@ only screen and (min-device-pixel-ratio : 1.5) {
          price = parseInt(localStorage.getItem("price"));
          cookies = parseInt(localStorage.getItem("cookies"));
          username = localStorage.getItem("username");
+         if(localStorage.getItem("energy") > 0,
+            localStorage.getItem("maxenergy") > 0){
+         energy = parseInt(localStorage.getItem("energy"));
+         maxEnergy = parseInt(localStorage.getItem("maxenergy"));
+         } else { energy= 900; maxEnergy = 900};
          
          blurEff.setAttribute("style", "filter: blur(0px)"); 
          document.querySelector(".username").style.display = "none";
@@ -538,6 +550,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
            $save("price", price);
            $save("cookies", cookies);
            $save("username", username);
+           $save("energy", energy);
+           $save("maxenergy", maxEnergy);
         }
         
         
@@ -574,7 +588,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
             numsel = Math.floor(Math.random() * 2);     
             var amount =  Math.round(Math.floor(Math.random() * 5000) + 522 * multiplier);
             var multAm = Math.round((amount / 100) * multiplier);
-            docId("dialogue").innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
+            delem.innerHTML = "You explored the amazon rainforest and got <strong>" + addCommas(amount + multAm) + "</strong> coins";
             coins += Math.round(amount) + multAm;
             energy -= 100;
             update();}
@@ -601,6 +615,23 @@ only screen and (min-device-pixel-ratio : 1.5) {
            }
         }
         
+        function upgradeEnergy(){
+        if(coins < energyprice){
+        
+        delem.innerHTML = "You don't have enough money to upgrade your energy.";
+        return
+        }else {
+        coins -= energyprice;
+        maxEnergy = Math.round(maxEnergy + ((20 / 100) * maxEnergy));
+        
+        delem.innerHTML = `You upgraded your energy for <strong> ${addCommas(energyprice)} </strong> coins.`;
+        energyprice = Math.round((20 / 100 * energyprice) + energyprice);
+        update();
+        }
+        }
+        
+        
+        
         function updateEnergyBar (test, value) {
           value = Math.round(value);
           
@@ -611,6 +642,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
         
         function bakeCookie(){
              if (coins < cPrice) {
+                 delem.innerHTML = "You don't have enough money to bake more cookies.";
                  return
              } else if (coins > cPrice){
                 delem.innerHTML = "You baked <strong> 1 </strong> cookie.";
@@ -667,6 +699,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
 			        docId("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
 			        docId("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
 					
+					
+					docId("energyprice").innerHTML = "<strong>" + addCommas(energyprice) + "</strong> coins";
 			        docId("price").innerHTML = "<strong>" + addCommas(price) + "</strong> coins";			
 			        docId("currentMulti").innerHTML = "You currently have a <strong class='mult'>" + multiplier.toFixed(1) + "%" + "</strong> multiplier.";
 			        docId("currentCookies").innerHTML = "You currently have <strong class='cookies'>" + cookies + "</strong> cookies.";
@@ -677,7 +711,13 @@ only screen and (min-device-pixel-ratio : 1.5) {
 					if (energy === 0){
 					   delem.innerHTML = "You are already tired. Eat some cookies to replenish a portion of your energy.";					   
 					   docId("impNotice").innerHTML = "<strong style='color:rgb(240,130,130);'>!!! EXHAUSTED !!!</strong>";
-					};					      
+					};
+					if (maxEnergy > 20000){
+					docId("energydiv").innerHTML = `<p style="color:white;" id="currentMulti">You've already maxed your <strong>Energy</strong>.</p>
+					<button style="background: rgb(80,80,80);"onclick="upgradeEnergy()" id="upgrade" style="display: flex; justify-content: center; align-items: center;" disabled>UPGRADE</button>
+					<p style="color:white; background:  rgb(240,130,130);" id="energyprice" class="multiPrice">MAXED</p>`;
+					}
+										      
       };
       sessionLoad();
     </script>
