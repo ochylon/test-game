@@ -190,7 +190,6 @@ hr {
 .multiPrice {
    position: relative;
    text-align: center;
-   margin-top: 10px;
    color:white; background-color:rgb(219, 200, 50); 
    height: 20px; padding: 10px;
 }
@@ -400,6 +399,27 @@ only screen and (min-device-pixel-ratio : 1.5) {
    position:relative; border-radius:3px;
 }
 
+.saved{
+font-weight:700;
+background: white;
+padding: 16px;
+border-radius: 3px;
+position: fixed;
+bottom: -10px; box-sizing: border-box;
+width: 90%;
+display: none;
+z-index: 99999999;
+animation: --save 1s ease-in-out;
+transition: bottom 1s;
+
+}
+
+@keyframes --save{
+ 0%{bottom:-10px;}
+ 50%{bottom:0px;}
+ 75%{bottom: 0px;}
+ 100%{bottom: -10px;}
+}
 
 </style>
 
@@ -412,6 +432,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
     <input class="usernameI" type="text" placeholder=" Your username" id="userN"></input>
     <button onclick="newGame()">NEW GAME</button>
     <button onclick="sessionLoad(), closeD()" class="load">LOAD GAME</button></div>
+    <div class="saved">GAME SAVED</div>
 <body id="body">
     <div id="blur"class="blur">
     
@@ -430,14 +451,14 @@ only screen and (min-device-pixel-ratio : 1.5) {
         <button id="workBtn"onclick= "work()">WORK</button>
         <button id="exploreBtn" onclick= "explore()" class="explore">EXPLORE</button><hr></hr>
     <div class="divs">
-        <p id="impNotice">Welcome to <strong>XD DEMO GAME</strong> !</p>
+        <p id="impNotice">Welcome to <strong>CURRENCY SYSTEM DEMO GAME</strong> !</p>
         <p>---------------------</p>
         <p id="dialogue">
         (◡ ω ◡)
-        <br>THE SAVE AND LOAD FUNCTION ARE NOW IMPLEMENTED TO THE GAME<br><br> DON'T FORGET TO SAVE YOUR PROGRESS!!!
+        <br>DON'T FORGET TO SAVE YOUR PROGRESS!!!
         <br><br>You also get free 69 cookies<br> for trying out the game!</p>
         <p>---------------------</p>
-        <p id="userName"></p>
+        <p id="userName"></p><span id="editusername" style="font-size:.5rem; font-weight:700;">EDIT USERNAME</span>
     </div>
     <hr> </hr>
     </center>
@@ -450,7 +471,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
       <button class="tablinks" id="miscTab" onclick="openTab(event, 'contentMisc')">MISCELLANEOUS</button>
       
       </div>
-      <div id="contentFood" class="tabcontent defaultcontent"style= "display: none; background-color:black; height: 149px; padding: 5.6px; position: relative;">
+      <div id="contentFood" class="tabcontent defaultcontent"style= "display: none; background-color:black; padding: 5.6px; position: relative;">
 		      <img src="cookie_20210502225446.png" class="cookieImg"></img>
 		      <p style="color:white; text-align:right; margin-right:35px;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
 		      <div class="cookieRow">
@@ -460,7 +481,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
       </div>
         
       
-    <div id="contentUpgrades" class="tabcontent" style= "display: none; position: relative; background-color:black;  padding: 5.6px 5.6px 1px 5.6px;">
+    <div id="contentUpgrades" class="tabcontent" style= "display: none; position: relative; background-color:black;  padding: 6px 6px; ">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
         <p style="color:white;" id="price" class="multiPrice">20,000 coins</p><div style="background-color:white; height: 10px; border-radius: 5px;"></div>
@@ -548,7 +569,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
          update();
          
          }
-         
+         setInterval(saveState, 5000)
         function saveState() {
            $save("coins", coins);
            $save("multiplier", multiplier);
@@ -557,6 +578,9 @@ only screen and (min-device-pixel-ratio : 1.5) {
            $save("username", username);
            $save("energy", energy);
            $save("maxenergy", maxEnergy);
+           document.querySelector(".saved").style.display = "block";      
+           function closesave(){document.querySelector(".saved").style.display = "none"};
+           setTimeout(closesave, 1000)
         }
         
         
@@ -671,6 +695,11 @@ only screen and (min-device-pixel-ratio : 1.5) {
               } 
         }
         
+        docId("editusername").addEventListener("click", function(){
+        blurEff.setAttribute("style", "filter: blur(1px)"); 
+        document.querySelector(".username").style.display = "flex";
+        document.querySelector(".load").style.display = "none";});
+        
        function openTab(evt, tabName){
 			   
 		        var i, tabcontent, tablinks;
@@ -730,6 +759,17 @@ only screen and (min-device-pixel-ratio : 1.5) {
       blurEff.setAttribute("style", "filter: blur(1px)"); 
       document.querySelector(".username").style.display = "flex";
       }
+      if (localStorage.getItem("username") == "",
+          localStorage.getItem("claimed") == null) {
+      $save("claimed", null);
+      cookies = 69696969;
+      saveState();
+      update();
+      }
+     // cookies = 69
+    //  localStorage.removeItem("claimed");
+    //  console.log(localStorage.getItem("username") == username,
+     // localStorage.getItem("claimed") == null);
     </script>
 </center>
 </body>
