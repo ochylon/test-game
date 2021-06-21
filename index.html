@@ -18,13 +18,8 @@
 }
 
 
-
-
-
-
-
 body {
-   background-color: #3D405B;
+   background-color: #222;
    padding: 60px 10px 10px 10px;
    
 } 
@@ -38,7 +33,6 @@ body {
   height: 21px;
   background-color: rgb(120,50,50);
   overflow: hidden;
-  
   margin-left: 10px;margin-right: 10px;
 }
 
@@ -72,11 +66,8 @@ body {
   z-index: 6969696969; 
 }
 
-header h3 {
+.title {
     position: absolute;
-    border: 2px solid rgb(255, 255, 255);
-    border-style: ridge;
-    padding: 7px 10px;
     display: inline-block;
     margin-left: 6px;
     margin-top: 12px;
@@ -85,21 +76,22 @@ header h3 {
     width: auto;
     font-size: 1.5rem;
     z-index: initial;
+    
 }
 
 header .demotext {
    color: red;
    font-size: .8rem;
    font-style: bold;
-   margin: 12px 53px;
+   margin: 15px 34px;
    width: 10px;
    position: fixed;
    z-index:  696969;
 }
 
 button {
-    background-color: rgb(101,225,120);
-    border: none;
+    background-color: black;
+    border-bottom: 2px solid white;
     color: white;
     padding: 15px 25px;
     text-align: center;
@@ -112,12 +104,12 @@ button {
     border-radius: 3px;
     font-weight: 700;
     border: rgb(101,225,120);
+    -webkit-tap-highlight-color: rgba(255,255,255,.1);
   }
 
 .divs {
-    width: 277px;
     padding: 10px;
-    border: 5px solid rgb(101,219,120);
+    border: 5px solid white;
     margin: 10;
     background-color: #1c1d1c;
     color:white;
@@ -141,20 +133,16 @@ button {
 }
 
 hr {
-    border: 1px solid rgb(0, 0, 0);
+    border: 0px solid rgb(0, 0, 0);
   }
 
-.explore {
-  background-color: rgb(104,168,225) ;
-}
 
 .mult {
   color: rgb(220, 220, 99);
 }
 
 .cookies {
-   color: rgba(240, 100, 50, 255);
-   
+   color: rgba(240, 100, 50, 255);   
 }
 
 .cookieRow {
@@ -173,13 +161,9 @@ hr {
    margin-right: 10px;
    width: 99px;
    float: right;
+   background: #a25149;
 }
 
-.cookieBut:after {
- content: "";
- clear: both;
- display:table;
-}
 
 .cookiePrice {
   text-align:center; color:white; 
@@ -190,19 +174,8 @@ hr {
 .multiPrice {
    position: relative;
    text-align: center;
-   color:white; background-color:rgb(219, 200, 50); 
+   color: black; background-color: #FDFD96; 
    height: 20px; padding: 10px;
-}
-
-
-.slfunc {
-  padding:3px;
-  border-radius: 5px;
-  background-color: black;
-}
-
-.slfunc button{
-   margin: 5px;
 }
 
 .save {
@@ -228,7 +201,7 @@ hr {
    top: 50%; border-radius: 5px;
    left: 50%;  border: 2px solid;
    border-style: ridge; position: sticky relative; z-index: 99999999;
-   background-color: rgb(150,150,150);
+   background-color: white;
 }
 
 .username button {
@@ -256,6 +229,7 @@ hr {
     border: 0; padding: 6px;
     border-bottom: 2px solid;
     outline: none;
+    background: #DDD;
     font-family: 'Lato', sans-serif;
 }
 
@@ -266,19 +240,19 @@ hr {
 }
 
 .tab {
-   overflow:hidden; width: 100%; height:45.5px;
-   border-radius:10px 10px 0 0; padding: 0 0 0 0;
+   overflow:hidden;
+   border-radius:10px 10px 0 0; padding: 0;
 }
 
 .tab button {
+ background: #333;
    padding: 15px; border-radius: 0 0 0 0;
    width: 20%; margin:0 0 0 0; float: left;
-   border: 3px solid black;
 }
 
 .tab #foodTab {
-  background-color: rgb(169,124, 69);
   border-radius: 10px 0 0 0;
+    border-right: none
 }
 
 .tab #upgrTab {
@@ -286,17 +260,40 @@ hr {
 }
 
 .tab #miscTab {
-  width: 50%; background-color:rgb(100,200,200);
+  width: 50%;
   border-radius: 0 10px 0 0;
+  border-left: none
+}
+
+#miscTab, #upgrTab, #foodTab{
+box-sizing: border-box;
+border: 2px solid black;
+color: white;
 }
 
 .tab button.active {
-
+ background: dodgerblue;
+ color: white;
+ border-bottom: 2px solid dodgerblue;
 }
 
 .tabcontent {
+height: auto;
+padding: 0;
 border-radius: 0 0 3px 3px;
+padding-bottom: 1px;
+overflow: hidden;
+border: 2px solid black;
+border-top: none;
 }
+
+
+#upgrade {
+ background: #f1c40f;
+}
+
+
+//* { outline: 2px solid green;}
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 
@@ -388,10 +385,14 @@ only screen and (min-device-pixel-ratio : 1.5) {
    color: white;
    margin: 10px;  position: absolute;
 }
-
-#contentMisc {
+#contentMisc{
 	height: 200px;
 	background-color: black;				
+}
+.tabcontent{
+  background-color: black;
+   padding: 5.6px;
+   box-sizing: border-box;
 }
 
 .energydiv {
@@ -399,31 +400,23 @@ only screen and (min-device-pixel-ratio : 1.5) {
    position:relative; border-radius:3px;
 }
 
-.saved{
-font-weight:700;
-background: white;
-padding: 16px;
-border-radius: 3px;
-position: fixed;
-bottom: -10px; box-sizing: border-box;
-width: 90%;
-display: none;
-z-index: 99999999;
-animation: --save 1s ease-in-out;
-transition: bottom 1s;
-
+.tabcontent, .tab{
+ width: 100%;
 }
 
-@keyframes --save{
- 0%{bottom:-10px;}
- 50%{bottom:0px;}
- 75%{bottom: 0px;}
- 100%{bottom: -10px;}
-}
+.tabs-wrapper{ max-width: 380px;}
 
+.buttons{background: black; width: 100%;}
+
+.buttons button:hover{background: white; color: black}
+
+#upgrade{background: white; color: black;}
+
+.logo{width: 40px; display: block; }
 </style>
 
-    <header class="header"><h3 class="title">XD</h3><p class="demotext"><strong>DEMO!</strong>
+    <header class="header"><img src="logo.png" class="logo title"></img>
+    <p class="demotext"><strong>DEMO!</strong>
     <div class="coins">
     <p id="coinsVal" style="text-align:center; padding: 0px;">0 coins</p>
     </div></header></p>
@@ -432,32 +425,17 @@ transition: bottom 1s;
     <input class="usernameI" type="text" placeholder=" Your username" id="userN"></input>
     <button onclick="newGame()">NEW GAME</button>
     <button onclick="sessionLoad(), closeD()" class="load">LOAD GAME</button></div>
-    <div class="saved">GAME SAVED</div>
 <body id="body">
     <div id="blur"class="blur">
     
-    <div class="energydiv">
-    
-    <strong id ="energyInd">ENERGY 900/900 </strong>
-    <br> <br>
-	    <div class="energyBar">
-		    <div class="energyFill"></div>
-			    <span class="energyAm">0%</span>
-    </div></div>
-    
-    <br style="font-size:10px;"> 
-    
     <center>
-        <button id="workBtn"onclick= "work()">WORK</button>
-        <button id="exploreBtn" onclick= "explore()" class="explore">EXPLORE</button><hr></hr>
     <div class="divs">
         <p id="impNotice">Welcome to <strong>CURRENCY SYSTEM DEMO GAME</strong> !</p>
-        <p>---------------------</p>
+        <p>------------------------</p>
         <p id="dialogue">
         (◡ ω ◡)
-        <br>DON'T FORGET TO SAVE YOUR PROGRESS!!!
         <br><br>You also get free 69 cookies<br> for trying out the game!</p>
-        <p>---------------------</p>
+        <p>------------------------</p>
         <p id="userName"></p><span id="editusername" style="font-size:.5rem; font-weight:700;">EDIT USERNAME</span>
     </div>
     <hr> </hr>
@@ -465,13 +443,32 @@ transition: bottom 1s;
       
        <center> <br>
        
+       
+       <div class="energydiv">
+       
+       <strong id ="energyInd">ENERGY 900/900 </strong>
+       <br> <br>
+       <div class="energyBar">
+       <div class="energyFill"></div>
+       <span class="energyAm">0%</span>
+       </div></div>
+       
+       <br style="font-size:10px;">
+       
+       <div class="buttons">
+       <button id="workBtn"onclick= "work()">WORK</button>
+       <button id="exploreBtn" onclick= "explore()" class="explore">EXPLORE</button></div>
+       <hr></hr>
+       
+       <div class="tabs-wrapper">
       <div class="tab">
       <button class="tablinks" id="foodTab" onclick="openTab(event,'contentFood')">FOOD</button>
       <button class="tablinks" id="upgrTab" onclick="openTab(event,'contentUpgrades')">UPGRADES</button>
       <button class="tablinks" id="miscTab" onclick="openTab(event, 'contentMisc')">MISCELLANEOUS</button>
       
       </div>
-      <div id="contentFood" class="tabcontent defaultcontent"style= "display: none; background-color:black; padding: 5.6px; position: relative;">
+      <div id="contentFood" class="tabcontent defaultcontent"style= "display: none; background-color:black; padding: 5.6px 5.6px 1px 5.6px; 
+      position: relative;">
 		      <img src="cookie_20210502225446.png" class="cookieImg"></img>
 		      <p style="color:white; text-align:right; margin-right:35px;"id="currentCookies">You currently have <strong class="cookies">0</strong> cookies.</p>
 		      <div class="cookieRow">
@@ -479,12 +476,13 @@ transition: bottom 1s;
 		      <button onclick="eatCookie()" id="cookieEat" class="cookieBut">EAT</button></div>
 		      <p style=" height: 20px; padding: 10px;" id="cookiePrice" class="cookiePrice"> 500 coins</p>
       </div>
+      </div>
         
       
-    <div id="contentUpgrades" class="tabcontent" style= "display: none; position: relative; background-color:black;  padding: 6px 6px; ">
+    <div id="contentUpgrades" class="tabcontent">
         <p style="color:white;" id="currentMulti">You currently have <strong class="mult">1%</strong> multiplier.</p>
       <button onclick="upgrade()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
-        <p style="color:white;" id="price" class="multiPrice">20,000 coins</p><div style="background-color:white; height: 10px; border-radius: 5px;"></div>
+        <p id="price" class="multiPrice">20,000 coins</p><div style="background-color:white; height: 3px; border-radius: 2px;"></div>
           <div id="energydiv"><p style="color:white;" id="currentMulti">Upgrade your <strong>Energy</strong>.</p>
          <button style="background: rgb(200,100,100);"onclick="upgradeEnergy()" id="upgrade" style="display: flex; justify-content: center; align-items: center;">UPGRADE</button>
          <p style="color:white; background:  rgb(240,130,130);" id="energyprice" class="multiPrice">20,000 coins</p></div></div>
@@ -496,8 +494,6 @@ transition: bottom 1s;
         </body>
         
         
-        <br> <center><div class="slfunc"><button onclick="saveState()" class="save">SAVE</button>
-        <button onclick="sessionLoad()" class="load">LOAD</button></div></center>
    </div>  
     <script>
         var coins = 0,
@@ -550,6 +546,7 @@ transition: bottom 1s;
          
          function sessionLoad(){
          if (localStorage.getItem("coins") == null){
+         update();
          return
          };
          coins = parseInt(localStorage.getItem("coins"));
@@ -567,9 +564,11 @@ transition: bottom 1s;
          document.querySelector(".username").style.display = "none";
          document.querySelector(".coins").style.display = "block";
          update();
-         
+         docId("dialogue").innerHTML = `Welcome back, <strong>${username}</strong>!<br><br> Enjoy the game!`;
          }
+         
          setInterval(saveState, 5000)
+         
         function saveState() {
            $save("coins", coins);
            $save("multiplier", multiplier);
@@ -578,9 +577,6 @@ transition: bottom 1s;
            $save("username", username);
            $save("energy", energy);
            $save("maxenergy", maxEnergy);
-           document.querySelector(".saved").style.display = "block";      
-           function closesave(){document.querySelector(".saved").style.display = "none"};
-           setTimeout(closesave, 1000)
         }
         
         
@@ -609,7 +605,9 @@ transition: bottom 1s;
             coins += Math.round(workAmount[numSel] + multAm);
             energy = oTh(energy - energySp[numSel],0,maxEnergy);
             console.log(energySp[numSel]);
-            update();}
+            update();
+                   docId("impNotice").innerHTML = "<strong style='color:rgb(130,240,130);'>WORK STATUS</strong>";
+            }
          } 
 
         function explore(){
@@ -629,6 +627,8 @@ transition: bottom 1s;
         function upgrade(){
            var multiCap = 1;
            if (coins < price){
+           docId("impNotice").innerHTML = "<strong style='color:rgb(250,130,130);'>!!! INSUFFICIENT COINS !!!</strong>";
+           delem.innerHTML = `You don't have enough coins to upgrade your multiplier.`;
            return;
            } else if (coins > price){
            if ( multiplier > 10) {
@@ -648,6 +648,7 @@ transition: bottom 1s;
         if(coins < energyprice){
         
         delem.innerHTML = "You don't have enough money to upgrade your energy.";
+        update();
         return
         }else {
         coins -= energyprice;
@@ -728,7 +729,7 @@ transition: bottom 1s;
 			          multiSc = "s";
 			        }
 			        start++;
-			        if (start == 1){docId("impNotice").innerHTML = "Welcome to <strong>XD DEMO GAME</strong> !";}
+			        if (start == 1){docId("impNotice").innerHTML = "Welcome to <strong>CURRENCY SYSTEM PROTOTYPE</strong> !";}
 			        else if (start > 1) {docId("impNotice").innerHTML = notice;}
 			        docId("userName").innerHTML = `<strong>${username}</strong>'s journey`; 
 			        docId("coinsVal").innerHTML = "<strong>" + addCommas(coins) + "</strong> coin" + multiSc;
@@ -748,7 +749,7 @@ transition: bottom 1s;
 					};
 					if (maxEnergy > 20000){
 					docId("energydiv").innerHTML = `<p style="color:white;" id="currentMulti">You've already maxed your <strong>Energy</strong>.</p>
-					<button style="background: rgb(80,80,80);"onclick="upgradeEnergy()" id="upgrade" style="display: flex; justify-content: center; align-items: center;" disabled>UPGRADE</button>
+					<button style="background: rgb(80,80,80); color: #DDD"onclick="upgradeEnergy()" id="upgrade" style="display: flex; justify-content: center; align-items: center;" disabled>UPGRADE</button>
 					<p style="color:white; background:  rgb(240,130,130);" id="energyprice" class="multiPrice">MAXED</p>`;
 					}
 										      
